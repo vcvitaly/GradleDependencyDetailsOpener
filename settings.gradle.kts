@@ -5,4 +5,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "JavaDependencyClicker"
+rootProject.name = "GradleDependencyDetailsOpener"
