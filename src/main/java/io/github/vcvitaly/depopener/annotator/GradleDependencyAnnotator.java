@@ -6,7 +6,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import io.github.vcvitaly.depopener.resolver.ScopeArgumentResolver;
-import io.github.vcvitaly.depopener.resolver.ScopeArgumentResolverImpl;
+import io.github.vcvitaly.depopener.resolver.ElementTypeScopeArgumentResolver;
 import org.jetbrains.annotations.NotNull;
 
 public class GradleDependencyAnnotator implements Annotator {
@@ -15,7 +15,7 @@ public class GradleDependencyAnnotator implements Annotator {
 
     // TODO Remove and replace with DI
     public GradleDependencyAnnotator() {
-        this(new ScopeArgumentResolverImpl());
+        this(new ElementTypeScopeArgumentResolver());
     }
 
     public GradleDependencyAnnotator(ScopeArgumentResolver scopeArgumentResolver) {
