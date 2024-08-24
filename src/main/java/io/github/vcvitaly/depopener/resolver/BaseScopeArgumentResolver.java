@@ -17,7 +17,7 @@ public abstract class BaseScopeArgumentResolver implements ScopeArgumentResolver
                                      List<String> predicateArgs) {
         this.pePredicates = ScopeResolutionUtil.getPePredicates(predicateArgs, argResolutionType);
         this.methodCallPredicate = ScopeResolutionUtil.PE_PREDICATE_FACTORY
-                .apply(methodScopeValue, ScopeArgumentResolutionType.TO_STRING);
+                .apply(methodScopeValue, argResolutionType);
     }
 
     @Override
