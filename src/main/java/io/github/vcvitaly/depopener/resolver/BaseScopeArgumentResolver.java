@@ -2,8 +2,8 @@ package io.github.vcvitaly.depopener.resolver;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
-import io.github.vcvitaly.depopener.enumeration.ScopeArgumentResolutionType;
-import io.github.vcvitaly.depopener.util.ScopeResolutionUtil;
+import io.github.vcvitaly.depopener.enumeration.PsiElementResolutionType;
+import io.github.vcvitaly.depopener.util.PsiResolutionUtil;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -13,10 +13,10 @@ public abstract class BaseScopeArgumentResolver implements ScopeArgumentResolver
     private final Predicate<PsiElement> methodCallPredicate;
 
     public BaseScopeArgumentResolver(String methodScopeValue,
-                                     ScopeArgumentResolutionType argResolutionType,
+                                     PsiElementResolutionType argResolutionType,
                                      List<String> predicateArgs) {
-        this.pePredicates = ScopeResolutionUtil.getPePredicates(predicateArgs, argResolutionType);
-        this.methodCallPredicate = ScopeResolutionUtil.PE_PREDICATE_FACTORY
+        this.pePredicates = PsiResolutionUtil.getPePredicates(predicateArgs, argResolutionType);
+        this.methodCallPredicate = PsiResolutionUtil.PE_PREDICATE_FACTORY
                 .apply(methodScopeValue, argResolutionType);
     }
 

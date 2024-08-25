@@ -5,8 +5,8 @@ import com.intellij.lang.annotation.Annotator;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
-import io.github.vcvitaly.depopener.resolver.ScopeArgumentResolver;
 import io.github.vcvitaly.depopener.resolver.ElementTypeScopeArgumentResolver;
+import io.github.vcvitaly.depopener.resolver.ScopeArgumentResolver;
 import org.jetbrains.annotations.NotNull;
 
 public class GradleDependencyAnnotator implements Annotator {
