@@ -8,9 +8,9 @@ public class DescribedPsiElementPredicate implements Predicate<PsiElement> {
     private final String comparisonString;
     private final Predicate<PsiElement> tester;
 
-    public DescribedPsiElementPredicate(String comparisonString, Predicate<PsiElement> supplier) {
+    public DescribedPsiElementPredicate(String comparisonString, Predicate<PsiElement> tester) {
         this.comparisonString = comparisonString;
-        tester = supplier;
+        this.tester = tester;
     }
 
     @Override
