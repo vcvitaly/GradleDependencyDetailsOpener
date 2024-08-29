@@ -7,11 +7,12 @@ import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import io.github.vcvitaly.depopener.resolver.ElementTypeScopeArgumentResolver;
 import io.github.vcvitaly.depopener.resolver.ScopeArgumentResolver;
 import io.github.vcvitaly.depopener.util.Constants;
 import org.jetbrains.annotations.NotNull;
+
+import static io.github.vcvitaly.depopener.util.DependencyTextRangeUtil.getDependencyTextRange;
 
 public class GroovyGradleDependencyAnnotator implements Annotator {
 
@@ -35,16 +36,14 @@ public class GroovyGradleDependencyAnnotator implements Annotator {
         final PsiFile containingFile = element.getContainingFile();
         if (containingFile.getName().endsWith(".gradle")) {
 
-            if (element instanceof LeafPsiElement lpe) {
-                if (scopeArgumentResolver.resolve(lpe)) {
-                    System.out.printf("%s at %d%n", lpe.getText(), System.currentTimeMillis());
-                    final String msg = getMsg();
-                    final TextRange textRange = lpe.getTextRange();
-                    holder.newAnnotation(HighlightSeverity.INFORMATION, msg)
-                            .range(textRange)
-                            .textAttributes(CodeInsightColors.INACTIVE_HYPERLINK_ATTRIBUTES)
-                            .create();
-                }
+            if (scopeArgumentResolver.resolve(element)) {
+                System.out.printf("%s at %d%n", element.getText(), System.currentTimeMillis());
+                final String msg = getMsg();
+                final TextRange textRange = getDependencyTextRange(element.getTextRange());
+                holder.newAnnotation(HighlightSeverity.INFORMATION, msg)
+                        .range(textRange)
+                        .textAttributes(CodeInsightColors.INACTIVE_HYPERLINK_ATTRIBUTES)
+                        .create();
             }
         }
     }

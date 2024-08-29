@@ -1,9 +1,9 @@
 package io.github.vcvitaly.depopener.resolver;
 
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
+import com.intellij.psi.PsiElement;
 
 /**
- * A resolver which takes a leaf PSI element as input and checks if it's an argument of some configuration scope,
+ * A resolver which takes a PSI element as input and checks if it's an argument of some configuration scope,
  * For example, for input <b>implementation 'org.springframework.boot:spring-boot-starter-web'</b> when the caret is placed at
  * the dependency description it wit should be resolved.
  *
@@ -15,5 +15,5 @@ import com.intellij.psi.impl.source.tree.LeafPsiElement;
  * </code></pre>
  */
 public interface ScopeArgumentResolver {
-    boolean resolve(LeafPsiElement lpe);
+    boolean resolve(PsiElement pe);
 }

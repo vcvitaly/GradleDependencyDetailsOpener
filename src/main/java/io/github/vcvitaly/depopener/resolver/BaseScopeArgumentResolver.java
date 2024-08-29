@@ -21,9 +21,9 @@ public abstract class BaseScopeArgumentResolver implements ScopeArgumentResolver
     }
 
     @Override
-    public boolean resolve(LeafPsiElement lpe) {
-        if (lpe.getElementType().toString().endsWith("quoted string")) {
-            PsiElement parent = lpe.getParent();
+    public boolean resolve(PsiElement pe) {
+        if (pe instanceof LeafPsiElement lpe && lpe.getElementType().toString().endsWith("quoted string")) {
+            PsiElement parent = pe.getParent();
             for (Predicate<PsiElement> pePredicate : pePredicates) {
                 if (pePredicate.test(parent)) {
                     parent = parent.getParent();
