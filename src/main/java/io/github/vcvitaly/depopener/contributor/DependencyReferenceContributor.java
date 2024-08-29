@@ -32,7 +32,10 @@ public class DependencyReferenceContributor extends PsiReferenceContributor {
                     @Override
                     public PsiReference @NotNull [] getReferencesByElement(@NotNull PsiElement element,
                                                                            @NotNull ProcessingContext context) {
-                        return new PsiReference[0];
+                        if (scopeArgumentResolver.resolve(element)) {
+
+                        }
+                        return PsiReference.EMPTY_ARRAY;
                     }
                 }
         );
