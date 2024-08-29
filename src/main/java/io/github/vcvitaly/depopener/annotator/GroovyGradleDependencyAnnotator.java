@@ -7,18 +7,19 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import io.github.vcvitaly.depopener.resolver.ElementTypeScopeArgumentResolver;
 import io.github.vcvitaly.depopener.resolver.ScopeArgumentResolver;
+import io.github.vcvitaly.depopener.util.Constants;
 import org.jetbrains.annotations.NotNull;
 
-public class GradleDependencyAnnotator implements Annotator {
+public class GroovyGradleDependencyAnnotator implements Annotator {
 
     private final ScopeArgumentResolver scopeArgumentResolver;
 
     // TODO Remove and replace with DI
-    public GradleDependencyAnnotator() {
+    public GroovyGradleDependencyAnnotator() {
         this(new ElementTypeScopeArgumentResolver());
     }
 
-    public GradleDependencyAnnotator(ScopeArgumentResolver scopeArgumentResolver) {
+    public GroovyGradleDependencyAnnotator(ScopeArgumentResolver scopeArgumentResolver) {
         this.scopeArgumentResolver = scopeArgumentResolver;
     }
 
@@ -30,22 +31,17 @@ public class GradleDependencyAnnotator implements Annotator {
 
         final PsiFile containingFile = element.getContainingFile();
         if (containingFile.getName().endsWith(".gradle")) {
-            try {
-                Thread.sleep(0, 100);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            /*if (!element.getText().equals("'org.springframework.boot:spring-boot-starter-web'")) {
-                return;
-            }*/
+
             if (element instanceof LeafPsiElement lpe) {
                 if (scopeArgumentResolver.resolve(lpe)) {
-                    System.out.println(lpe.getText());
+                    System.out.printf("%s at %d%n", lpe.getText(), System.currentTimeMillis());
+//                    final String msg = getMsg();
                 }
             }
-            /*if (element.getText().equals("'org.springframework.boot:spring-boot-starter-web'")) {
-                System.out.println("Ok");
-            }*/
         }
+    }
+
+    private String getMsg() {
+        return Constants.TOOLTIP;
     }
 }
