@@ -2,6 +2,9 @@ package io.github.vcvitaly.depopener.annotator;
 
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
+import com.intellij.lang.annotation.HighlightSeverity;
+import com.intellij.openapi.editor.colors.CodeInsightColors;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
@@ -35,7 +38,12 @@ public class GroovyGradleDependencyAnnotator implements Annotator {
             if (element instanceof LeafPsiElement lpe) {
                 if (scopeArgumentResolver.resolve(lpe)) {
                     System.out.printf("%s at %d%n", lpe.getText(), System.currentTimeMillis());
-//                    final String msg = getMsg();
+                    final String msg = getMsg();
+                    final TextRange textRange = lpe.getTextRange();
+                    holder.newAnnotation(HighlightSeverity.INFORMATION, msg)
+                            .range(textRange)
+                            .textAttributes(CodeInsightColors.INACTIVE_HYPERLINK_ATTRIBUTES)
+                            .create();
                 }
             }
         }
